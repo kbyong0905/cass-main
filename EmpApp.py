@@ -71,9 +71,9 @@ def AddEmp():
                 custombucket,
                 emp_image_file_name_in_s3)
             
-            insert_sql = "INSERT INTO employee(ID, FirstN, LastN, PriS, Location, Status) VALUES (%s, %s, %s, %s, %s, 'Active')"
+            insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s, %s, 'Active')"
             cursor = db_conn.cursor()
-            cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location))
+            cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location, status))
             db_conn.commit()
 
         except Exception as e:
