@@ -73,7 +73,7 @@ def AddEmp():
             
             insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s, 'Active')"
             cursor = db_conn.cursor()
-            cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location, status))
+            cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location))
             db_conn.commit()
 
         except Exception as e:
