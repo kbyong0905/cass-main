@@ -85,11 +85,12 @@ h1{
 						</div>
 					</form>
 
+					<form action="/delete/{{ result[0] }}" autocomplete="on" method = "POST" enctype="multipart/form-data">
 						<div style="text-align: center; margin-top: 10px;">
-							<button type="submit" class="btn btn-success" formaction="/delete/{{ result[0] }}"
+							<button type="submit" class="btn btn-success"
 							style="height:50px;font-size:14pt;color:white;width: 60%;">DELETE EMPLOYEE INFORMATION</button>
 						</div>
-						
+					</form>
 						
 						<div style="text-align: center; margin-top: 10px;">
 							<a href="/getemp" class="btn btn-success"
