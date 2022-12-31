@@ -34,9 +34,6 @@ def about():
 def getemp():
     return render_template('GetEmp.html')
 
-@app.route("/editemp", methods=['GET', 'POST'])
-def editemp():
-    return render_template('EditEmp.html')
 
 @app.route("/addemp", methods=['POST'])
 def AddEmp():
@@ -149,7 +146,7 @@ def EditStaff():
     last_name = request.form['last_name']
     pri_skill = request.form['pri_skill']
     location = request.form['location']
-    status = request.form['getStatus']
+    status = request.form['status']
     edit_image = request.files['edtimage']
 
     #if no image uploaded
