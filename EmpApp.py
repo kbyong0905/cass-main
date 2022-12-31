@@ -198,6 +198,11 @@ def EditStaff():
     titleData = "Data Updated"
     return render_template('EditEmpOutput.html',title=titleData)
 
+# Edit Employee Done
+@app.route("/update/",methods=['GET','POST'])
+def editEmpDone():
+    
+    return render_template('EditEmp.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
