@@ -10,10 +10,10 @@
   border: 1px solid;
 }
 
-.t2t{
-  text-align: left;
-  margin: 0px 5px;
-}
+div.left {
+	position: absolute;
+	left: auto;
+} 
 
 .circular_image {
   width: 200px;
@@ -32,9 +32,8 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<title>Employee Information</title>
 </head>
-<body style="background-color: #c8afff; text-align: center;">
+<body style="background-color: #94abbd; text-align: center;">
 
-	
 		<h1 style="color:#007400; font-weight: bold; font-style: italic; text-align: center;">EMPLOYEE INFORMATION</h1>
 		<h1 style="padding-top: 50px;"></h1>
 		<div class="h-100 d-flex align-items-center justify-content-center">
@@ -43,40 +42,43 @@
 					<form>
 						<div>
 							<img class="circular_image" src="{{ image_url }}" style="text-align: center;">
-							<label for="emp3" class="t2t">Profile Picture</label>
 						</div>
 
 						<div>
+							<label for="emp3" class="t2t" style="text-align: center;">Profile Picture</label>
+						</div>
+
+						<div class="left">
 							<label for="emp1" class="t2t">Employee ID</label>
 							<br> <input id="emp1" class="input66" type="number" name="emp_id" value="{{ result[0] }}" readonly>
 						</div>
 
-						<div>
+						<div class="left">
 							<label for="emp2" class="t2t">First Name</label>
 							<input id="emp2" class="input66" type="text" name="first_name" value="{{ result[1] }}" readonly>
 						</div>
 
-						<div>
+						<div class="left">
 							<label for="emp3" class="t2t">Last Name</label>
 							<input id="emp3" class="input66" type="text" name="last_name" value="{{ result[2] }}" readonly>
 						</div>
 
-						<div>
+						<div class="left">
 							<label for="emp4" class="t2t">Primary Skill</label>
 							<input id="emp4" class="input66" type="text" name="pri_skill" value="{{ result[3] }}" readonly>
 						</div>
 							
-						<div>
+						<div class="left">
 							<label for="emp5" class="t2t">Location</label>
 							<input id="emp5" class="input66" type="text" name="location" value="{{ result[4] }}" readonly>
-						</div>	
+						</div class="left">	
 						
-						<div>
+						<div class="left">
 							<label for="emp6" class="t2t">Status</label>
 							<input id="emp6" class="input66" type="text" name="location" value="{{ result[5] }}" readonly>
 						</div>
 
-						<div>
+						<div class="left">
 							<button type="submit" class="btn btn-primary" formaction="\EditEmp">EDIT EMPLOYEE INFORMATION</button>
 						</div>
 		
