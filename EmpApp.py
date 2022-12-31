@@ -139,6 +139,7 @@ def getEmpDone():
     
     return render_template('GetEmp.html')
 
+
 @app.route("/update", methods=['POST'])
 def EditStaff():
     emp_id= request.form['emp_id']
@@ -147,7 +148,7 @@ def EditStaff():
     pri_skill = request.form['pri_skill']
     location = request.form['location']
     status = request.form['status']
-    edit_image = request.files['edtimage']
+    edit_image = request.files['emp_image_file']
 
     #if no image uploaded
     if edit_image.filename == "":
