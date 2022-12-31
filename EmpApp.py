@@ -192,42 +192,41 @@ def EditStaff():
             cursor.close()
 
 
-        select_stmt = "SELECT * FROM employee WHERE emp_id = %(emp_id)s"
+        select_stmt = "SELECT * FROM employee WHERE emp_id = %s"
         cursor = db_conn.cursor()
             
-        try:
-            cursor.execute(select_stmt, { 'emp_id': int(emp_id) })
-            for result in cursor:
-                print(result)
+    try:
+        cursor.execute(select_stmt, emp_id)
+        for result in cursor:
+            print(result)
 
-        except Exception as e:
-            return str(e)
+    except Exception as e:
+        return str(e)
             
-        finally:
-            cursor.close()
+    finally:
+        cursor.close()
 
-            emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
-            s3 = boto3.resource('s3')
+        emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
+        s3 = boto3.resource('s3')
 
-            try:
-                print("Data inserted in MySQL RDS... uploading image to S3...")
-                bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
-                s3_location = (bucket_location['LocationConstraint'])
+    try:
+        print("Data inserted in MySQL RDS... uploading image to S3...")
+        bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
+        s3_location = (bucket_location['LocationConstraint'])
+        if s3_location is None:
+            s3_location = ''
+        else:
+            s3_location = '-' + s3_location
 
-                if s3_location is None:
-                    s3_location = ''
-                else:
-                    s3_location = '-' + s3_location
+            object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
+                s3_location,
+                custombucket,
+                emp_image_file_name_in_s3)
 
-                object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
-                    s3_location,
-                    custombucket,
-                    emp_image_file_name_in_s3)
+    except Exception as e:
+        return str(e)
 
-            except Exception as e:
-                return str(e)
-        
-        return render_template('GetEmpOutput.html', result=result, image_url=object_url)
+    return render_template('GetEmpOutput.html', result=result, image_url=object_url)
 
 
 # Edit Employee Done
@@ -239,14 +238,13 @@ def editEmpDone():
 @app.route('/delete/<string:ID>',methods=['POST','GET'])
 def delete(ID):
     s3_client = boto3.client("s3")
-    image_file_name = "staff-id-" + str(ID) + "_image_file"
+    image_file_name = "emp-id-" + str(ID) + "_image_file"
     response = s3_client.delete_object(Bucket=custombucket, Key=image_file_name)
-    delete_sql = "DELETE FROM staff WHERE StaffID=%s"
+    delete_sql = "DELETE FROM employee WHERE emp_id=%s"
     cursor = db_conn.cursor()
     cursor.execute(delete_sql, (ID))
     db_conn.commit()
-    titleData = "Data deleted"
-    return render_template('StaffOutput.html',title=titleData)
+    return render_template('GetEmp.html')
 
 
 if __name__ == '__main__':
