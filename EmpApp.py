@@ -192,11 +192,11 @@ def EditStaff():
             cursor.close()
 
 
-    select_stmt = "SELECT * FROM employee WHERE emp_id = %s"
+    select_stmt = "SELECT * FROM employee WHERE emp_id = %(emp_id)s"
     cursor = db_conn.cursor()
             
     try:
-        cursor.execute(select_stmt, emp_id)
+        cursor.execute(select_stmt, { 'emp_id': int(emp_id) })
         for result in cursor:
             print(result)
 
