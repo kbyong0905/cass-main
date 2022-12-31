@@ -145,7 +145,7 @@ def getEmpDone():
 
 @app.route("/update", methods=['POST'])
 def EditStaff():
-    staffID= request.form['getStaffID']
+    emp_id= request.form['emp_id']
     first_name = request.form['first_name']
     last_name = request.form['last_name']
     pri_skill = request.form['pri_skill']
@@ -156,9 +156,9 @@ def EditStaff():
     #if no image uploaded
     if edit_image.filename == "":
         try:
-            insert_sql = "UPDATE staff SET first_name=%s, last_name=%s, pri_skill=%s, location=%s, Status=%s WHERE StaffID=%s"
+            insert_sql = "UPDATE staff SET first_name= %s, last_name=%s, pri_skill=%s, location=%s, Status=%s WHERE emp_id = %(emp_id)s"
             cursor = db_conn.cursor()
-            cursor.execute(insert_sql, (first_name, last_name, pri_skill, location,status,staffID))
+            cursor.execute(insert_sql, (first_name, last_name, pri_skill, location,status, emp_id))
             db_conn.commit()
 
         except Exception as e:
@@ -172,12 +172,12 @@ def EditStaff():
         try:
             
             # Upload image file in S3 #
-            image_file_name = "emp-id-" + str(staffID) + "_image_file"
+            image_file_name = "emp-id-" + str(emp_id) + "_image_file"
             s3 = boto3.resource('s3')
 
-            insert_sql = "UPDATE staff SET first_name=%s, last_name=%s, pri_skill=%s, location=%s, Status=%s WHERE StaffID=%s"
+            insert_sql = "UPDATE staff SET first_name=%s, last_name=%s, pri_skill=%s, location=%s, Status=%s WHERE emp_id = %(emp_id)s"
             cursor = db_conn.cursor()
-            cursor.execute(insert_sql, (first_name, last_name, pri_skill, location,status,staffID))
+            cursor.execute(insert_sql, (first_name, last_name, pri_skill, location,status,emp_id))
             db_conn.commit()
             
             print("Data inserted in MySQL RDS... uploading image to S3...")
