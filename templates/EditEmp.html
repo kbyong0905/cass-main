@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<style>
+.input66{
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid;
+}
+
+.t2t{
+  text-align: left;
+  margin: 0px 5px;
+}
+
+
+.circular_image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: blue;
+  display:inline-block;
+  vertical-align:middle;
+}
+.circular_image img{
+  width:100%;
+}
+
+h1{
+		text-shadow: 1px 1px 2px #000000;
+	}
+</style>
+<head>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<title>Employee Information</title>
+</head>
+<body style="background-color: #94abbd;">
+
+		<h1 style="color:#f3f3f3; font-weight: bold; font-style: italic; text-align: center;">EMPLOYEE INFORMATION</h1>
+		<h1 style="padding-top: 50px;"></h1>
+		<div class="h-100 d-flex align-items-center justify-content-center">
+			<div style="background-color: #ffffff; color: #183a1d; width: 50%; margin: 10px auto; border-radius: 5px;">
+				<div style="padding: 20px;">
+					<form action="/fetchdata" autocomplete="on" method="POST">
+						<div style="text-align: center;">
+							<img class="circular_image" src="{{ image_url }}" style="text-align: center;"><br>
+						</div>
+						
+						<div style="text-align: center;">
+							<label style="text-align: center;">Profile Picture</label><br>
+						</div>
+						
+						<label for="emp1" class="t2t">Employee ID:</label>
+						<br> <input id="emp1" class="input66" type="number" name="emp_id" 
+						style="height:25px;font-size:14pt;color: black;" value="{{ result[0] }}" readonly><br>
+
+						<label for="emp2" class="t2t">First Name:</label>
+						<input id="emp2" class="input66" type="text" name="first_name" 
+						style="height:25px;font-size:14pt;color: black;" value="{{ result[1] }}"><br>
+
+						<label for="emp3" class="t2t">Last Name:</label>
+						<input id="emp3" class="input66" type="text" name="last_name" 
+						style="height:25px;font-size:14pt;color: black;" value="{{ result[2] }}"><br>
+
+						<label for="emp4" class="t2t">Primary Skill:</label>
+						<input id="emp4" class="input66" type="text" name="pri_skill" 
+						style="height:25px;font-size:14pt;color: black;" value="{{ result[3] }}"><br>
+							
+						<label for="emp5" class="t2t">Location:</label>
+						<input id="emp5" class="input66" type="text" name="location" 
+						style="height:25px;font-size:14pt;color: black;" value="{{ result[4] }}"><br>
+						
+						<label for="emp6" class="t2t">Status:</label>
+						<input id="emp6" class="input66" type="text" name="location" 
+						style="height:25px;font-size:14pt;color: black;" value="{{ result[5] }}"><br>
+
+						<div style="text-align: center;">
+							<button type="submit" class="btn btn-success" formaction="/update">EDIT EMPLOYEE INFORMATION</button>
+						</div>
+		
+					</form>
+				</div>
+			</div>
+		</div>
+</body>
+</html>
