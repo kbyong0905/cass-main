@@ -10,6 +10,11 @@
   border: 1px solid;
 }
 
+.t2t{
+  text-align: left;
+  margin: 0px 5px;
+}
+
 div.left {
 	position: absolute;
 	left: auto;
@@ -44,38 +49,24 @@ div.left {
 							<img class="circular_image" src="{{ image_url }}" style="text-align: center;">
 						</div>
 
-						<div>
-							<label for="emp3" class="t2t" style="text-align: center;">Profile Picture</label>
-						</div>
+						<label for="emp3" class="t2t" style="text-align: center;">Profile Picture</label>
 
-						<div class="left">
-							<label for="emp1" class="t2t">Employee ID</label>
-						</div>
+						<label for="emp1" class="t2t">Employee ID</label>
 						<br> <input id="emp1" class="input66" type="number" name="emp_id" value="{{ result[0] }}" readonly>
 
-						<div class="left">
-							<label for="emp2" class="t2t">First Name</label>
-						</div>
+						<label for="emp2" class="t2t">First Name</label>
 						<br> <input id="emp2" class="input66" type="text" name="first_name" value="{{ result[1] }}" readonly>
 
-						<div class="left">
-							<label for="emp3" class="t2t">Last Name</label>
-						</div>
+						<label for="emp3" class="t2t">Last Name</label>
 						<br> <input id="emp3" class="input66" type="text" name="last_name" value="{{ result[2] }}" readonly>
 
-						<div class="left">
-							<label for="emp4" class="t2t">Primary Skill</label>
-						</div>
+						<label for="emp4" class="t2t">Primary Skill</label>
 						<br> <input id="emp4" class="input66" type="text" name="pri_skill" value="{{ result[3] }}" readonly>
 							
-						<div class="left">
-							<label for="emp5" class="t2t">Location</label>
-						</div class="left">	
+						<label for="emp5" class="t2t">Location</label>
 						<br> <input id="emp5" class="input66" type="text" name="location" value="{{ result[4] }}" readonly>
 						
-						<div class="left">
-							<label for="emp6" class="t2t">Status</label>
-						</div>
+						<label for="emp6" class="t2t">Status</label>
 						<br> <input id="emp6" class="input66" type="text" name="location" value="{{ result[5] }}" readonly>
 
 						<div>
