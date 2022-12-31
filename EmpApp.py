@@ -138,7 +138,7 @@ def getEmp():
 def getEmpDone():
     
     return render_template('GetEmp.html')
-    
+
 @app.route("/update", methods=['POST'])
 def EditStaff():
     emp_id= request.form['emp_id']
@@ -152,7 +152,7 @@ def EditStaff():
     #if no image uploaded
     if edit_image.filename == "":
         try:
-            insert_sql = "UPDATE staff SET first_name= %s, last_name=%s, pri_skill=%s, location=%s, status=%s WHERE emp_id = %s"
+            insert_sql = "UPDATE employee SET first_name= %s, last_name=%s, pri_skill=%s, location=%s, status=%s WHERE emp_id = %s"
             cursor = db_conn.cursor()
             cursor.execute(insert_sql, (first_name, last_name, pri_skill, location, status, emp_id))
             db_conn.commit()
@@ -171,7 +171,7 @@ def EditStaff():
             image_file_name = "emp-id-" + str(emp_id) + "_image_file"
             s3 = boto3.resource('s3')
 
-            insert_sql = "UPDATE staff SET first_name=%s, last_name=%s, pri_skill=%s, location=%s, status=%s WHERE emp_id = %s"
+            insert_sql = "UPDATE employee SET first_name=%s, last_name=%s, pri_skill=%s, location=%s, status=%s WHERE emp_id = %s"
             cursor = db_conn.cursor()
             cursor.execute(insert_sql, (first_name, last_name, pri_skill, location, status, emp_id))
             db_conn.commit()
