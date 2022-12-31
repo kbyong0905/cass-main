@@ -39,13 +39,13 @@ h1{
 </head>
 <body style="background-color: #94abbd;">
 
-	
+
 		<h1 style="color:#f3f3f3; font-weight: bold; font-style: italic; text-align: center;">EMPLOYEE INFORMATION</h1>
 		<h1 style="padding-top: 50px;"></h1>
 		<div class="h-100 d-flex align-items-center justify-content-center">
 			<div style="background-color: #ffffff; color: #183a1d; width: 50%; margin: 10px auto; border-radius: 5px;">
 				<div style="padding: 20px;">
-					<form action="http://3.84.219.220:80/" autocomplete="on" method = "GET">
+					<form action="/update" autocomplete="on" method = "POST">
 						<div style="text-align: center;">
 							<img class="circular_image" src="{{ image_url }}" style="text-align: center;"><br>
 						</div>
@@ -61,40 +61,43 @@ h1{
 
 						<label for="emp2" class="t2t">First Name:</label>
 						<input id="emp2" class="input66" type="text" name="first_name" 
-						style="height:25px;font-size:14pt;color: black;" value="{{ result[1] }}" readonly><br>
+						style="height:25px;font-size:14pt;color: black;" value="{{ result[1] }}"><br>
 
 						<label for="emp3" class="t2t">Last Name:</label>
 						<input id="emp3" class="input66" type="text" name="last_name" 
-						style="height:25px;font-size:14pt;color: black;" value="{{ result[2] }}" readonly><br>
+						style="height:25px;font-size:14pt;color: black;" value="{{ result[2] }}"><br>
 
 						<label for="emp4" class="t2t">Primary Skill:</label>
 						<input id="emp4" class="input66" type="text" name="pri_skill" 
-						style="height:25px;font-size:14pt;color: black;" value="{{ result[3] }}" readonly><br>
+						style="height:25px;font-size:14pt;color: black;" value="{{ result[3] }}"><br>
 							
 						<label for="emp5" class="t2t">Location:</label>
 						<input id="emp5" class="input66" type="text" name="location" 
-						style="height:25px;font-size:14pt;color: black;" value="{{ result[4] }}" readonly><br>
+						style="height:25px;font-size:14pt;color: black;" value="{{ result[4] }}"><br>
 						
 						<label for="emp6" class="t2t">Status:</label>
 						<input id="emp6" class="input66" type="text" name="location" 
-						style="height:25px;font-size:14pt;color: black;" value="{{ result[5] }}" readonly><br>
+						style="height:25px;font-size:14pt;color: black;" value="{{ result[5] }}"><br>
 
 						<div style="text-align: center; margin-top: 10px;">
-							<button type="submit" class="btn btn-success" formaction="/update"
+							<button type="submit" class="btn btn-success" 
 							style="height:50px;font-size:14pt;color:white;width: 60%;">UPDATE EMPLOYEE INFORMATION</button>
 						</div>
+					</form>
 
 						<div style="text-align: center; margin-top: 10px;">
 							<button type="submit" class="btn btn-success" formaction="/delete/{{ result[0] }}"
 							style="height:50px;font-size:14pt;color:white;width: 60%;">DELETE EMPLOYEE INFORMATION</button>
 						</div>
 						
+						
 						<div style="text-align: center; margin-top: 10px;">
-							<button type="submit" class="btn btn-success"
-                            style="height:40px;font-size:14pt;color:white;width: 40%;">GO TO PREVIOUS PAGE</button>
+							<a href="/getemp" class="btn btn-success"
+                            style="height:40px;font-size:14pt;color:white;width: 40%;">GO TO PREVIOUS PAGE</a>
 						</div>
+						
 
-					</form>
+					
 				</div>
 			</div>
 		</div>
