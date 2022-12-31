@@ -44,13 +44,12 @@ h1{
 		<div class="h-100 d-flex align-items-center justify-content-center">
 			<div style="background-color: #ffffff; color: #183a1d; width: 50%; margin: 10px auto; border-radius: 5px;">
 				<div style="padding: 20px;">
-					<form action="/update" autocomplete="on" method="POST" enctype="multipart/form-data">
+					<form action="http://3.84.219.220:80/" autocomplete="on" method = "GET">
 						<div style="text-align: center;">
 							<img class="circular_image" src="{{ image_url }}" style="text-align: center;"><br>
 						</div>
 						
 						<div style="text-align: center;">
-							<input type=file id="img_btn" name="emp_image_file" style="height:25px;font-size:14pt;color: black;"> <br>
 							<label style="text-align: center;">Profile Picture</label><br>
 						</div>
 						
@@ -60,27 +59,27 @@ h1{
 
 						<label for="emp2" class="t2t">First Name:</label>
 						<input id="emp2" class="input66" type="text" name="first_name" 
-						style="height:25px;font-size:14pt;color: black;" value="{{ result[1] }}" required> <br>
+						style="height:25px;font-size:14pt;color: black;" value="{{ result[1] }}" readonly><br>
 
 						<label for="emp3" class="t2t">Last Name:</label>
 						<input id="emp3" class="input66" type="text" name="last_name" 
-						style="height:25px;font-size:14pt;color: black;" value="{{ result[2] }}" required><br>
+						style="height:25px;font-size:14pt;color: black;" value="{{ result[2] }}" readonly><br>
 
 						<label for="emp4" class="t2t">Primary Skill:</label>
 						<input id="emp4" class="input66" type="text" name="pri_skill" 
-						style="height:25px;font-size:14pt;color: black;" value="{{ result[3] }}" required><br>
+						style="height:25px;font-size:14pt;color: black;" value="{{ result[3] }}" readonly><br>
 							
 						<label for="emp5" class="t2t">Location:</label>
 						<input id="emp5" class="input66" type="text" name="location" 
-						style="height:25px;font-size:14pt;color: black;" value="{{ result[4] }}" required><br>
+						style="height:25px;font-size:14pt;color: black;" value="{{ result[4] }}" readonly><br>
 						
 						<label for="emp6" class="t2t">Status:</label>
 						<input id="emp6" class="input66" type="text" name="status" 
-						style="height:25px;font-size:14pt;color: black;" value="{{ result[5] }}" required><br>
+						style="height:25px;font-size:14pt;color: black;" value="{{ result[5] }}" readonly><br>
 
 						<div style="text-align: center;">
 							<button type="submit" class="btn btn-success"
-							style="height:50px;font-size:14pt;color:white;width: 70%;">UPDATE EMPLOYEE INFORMATION</button>
+                            style="height:50px;font-size:14pt;color:white;width: 50%;">GO BACK</button>
 						</div>
 		
 					</form>

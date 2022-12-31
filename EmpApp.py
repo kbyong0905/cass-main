@@ -132,6 +132,62 @@ def getEmp():
 
      return render_template('GetEmpOutput.html', result=result, image_url=object_url)
 
+@app.route("/update", methods=['POST'])
+def EditStaff():
+    staffID= request.form['getStaffID']
+    first_name = request.form['first_name']
+    last_name = request.form['last_name']
+    pri_skill = request.form['pri_skill']
+    location = request.form['location']
+    status = request.form['getStatus']
+    edit_image = request.files['edtimage']
+
+    #if no image uploaded
+    if edit_image.filename == "":
+        try:
+            insert_sql = "UPDATE staff SET first_name=%s, last_name=%s, pri_skill=%s, location=%s, Status=%s WHERE StaffID=%s"
+            cursor = db_conn.cursor()
+            cursor.execute(insert_sql, (first_name, last_name, pri_skill, location,status,staffID))
+            db_conn.commit()
+
+        except Exception as e:
+            return str(e)
+            
+        finally:
+            cursor.close()
+
+    #else got image upload, run image file query
+    else:
+        try:
+            
+            # Upload image file in S3 #
+            image_file_name = "staff-id-" + str(staffID) + "_image_file"
+            s3 = boto3.resource('s3')
+
+            insert_sql = "UPDATE staff SET Name=%s, Email=%s, Phone=%s,RoleID=%s,DepartmentID=%s,Salary=%s,Status=%s WHERE StaffID=%s"
+            cursor = db_conn.cursor()
+            cursor.execute(insert_sql, (name, email, phone, role,department,salary,status,staffID))
+            db_conn.commit()
+            
+            print("Data inserted in MySQL RDS... uploading image to S3...")
+            s3.Bucket(custombucket).put_object(Key=image_file_name, Body=edit_image)
+            bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
+            s3_location = (bucket_location['LocationConstraint'])
+            
+            if s3_location is None:
+                s3_location = ''
+            else:
+                s3_location = '-' + s3_location
+                object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(s3_location,custombucket,image_file_name)
+        except Exception as e:
+            return str(e)
+        
+        finally:
+            cursor.close()
+            
+    titleData = "Data Updated"
+    return render_template('StaffOutput.html',title=titleData)
+
 # Get Employee Done
 @app.route("/fetchdata/",methods=['GET','POST'])
 def getEmpDone():
