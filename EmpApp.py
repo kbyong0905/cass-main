@@ -206,8 +206,8 @@ def EditStaff():
     finally:
         cursor.close()
 
-        emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
-        s3 = boto3.resource('s3')
+    emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
+    s3 = boto3.resource('s3')
 
     try:
         print("Data inserted in MySQL RDS... uploading image to S3...")
@@ -218,10 +218,10 @@ def EditStaff():
         else:
             s3_location = '-' + s3_location
 
-            object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
-                s3_location,
-                custombucket,
-                emp_image_file_name_in_s3)
+        object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
+        s3_location,
+        custombucket,
+        emp_image_file_name_in_s3)
 
     except Exception as e:
         return str(e)
