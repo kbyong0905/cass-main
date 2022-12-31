@@ -16,7 +16,7 @@
 }
 
 body {
-		background-color: #effaf6;
+		background-color: #c8afff;
 	}
 
 h1{
@@ -42,7 +42,7 @@ h1{
     <div style="padding: 20px;">
 			<form action="/addemp" autocomplete="on" method = "POST" enctype="multipart/form-data">
         
-				Profile Picture: <input type=file id="img_btn" name="emp_image_file" style="height:25px;font-size:14pt;color:grey;"> <br><br>
+				Profile Picture: <input type=file id="img_btn" name="emp_image_file" style="height:25px;font-size:14pt;color:grey;"> <br>
 
         <label for="emp1" class="t2t">Employee ID</label>
 				<br> <input id="emp1" class="input66" type="number" name="emp_id" style="height:25px;font-size:14pt;color:grey;"
@@ -50,32 +50,32 @@ h1{
 
         <label for="emp2" class="t2t">First Name</label>
 		  	<input id="emp2" class="input66" type="text" name="first_name" style="height:25px;font-size:14pt;color:grey;"
-        placeholder="First Name"><br><br>
+        placeholder="First Name"><br>
 
         <label for="emp3" class="t2t">Last Name</label>
 		  	<input id="emp3" class="input66" type="text" name="last_name" style="height:25px;font-size:14pt;color:grey;"
-        placeholder="Last Name"><br><br>
+        placeholder="Last Name"><br>
 
         <label for="emp4" class="t2t">Primary Skills</label>
 		  	<input id="emp4" class="input66" type="text" name="pri_skill" style="height:25px;font-size:14pt;color:grey;"
-        placeholder="Primary Skill"><br><br>
+        placeholder="Primary Skill"><br>
 
         <label for="emp5" class="t2t">Location</label>
 		  	<input id="emp5" class="input66" type="text" name="location" style="height:25px;font-size:14pt;color:grey;" 
         placeholder="Location"><br>
         
         <div style="text-align: center; margin-top: 10px;">
-          <button type="submit" class="btn btn-success" style="height:25px;font-size:14pt;color:grey; width: 100%;">UPDATE DATABASE</button>
+          <button type="submit" class="btn btn-success" style="height:50px;font-size:14pt;color:grey; width: 100%;">UPDATE DATABASE</button>
         </div>
 
         <div style="text-align: center; margin-top: 10px;">
           <button type="submit" class="btn btn-info" formaction="/getemp" 
-          style="height:25px;font-size:14pt;color:grey;width: 70%;">GET EMPLOYEE INFROMATION</button>
+          style="height:50px;font-size:14pt;color:grey;width: 70%;">GET EMPLOYEE INFROMATION</button>
         </div>
 
         <div style="text-align: center; margin-top: 10px;">
           <button type="submit" class="btn btn-info" formaction="/aboutus" 
-          style="height:25px;font-size:14pt;color:grey; width: 50%;">ABOUT US</button>
+          style="height:50px;font-size:14pt;color:grey; width: 50%;">ABOUT US</button>
         </div>
 		  	
 			</form>

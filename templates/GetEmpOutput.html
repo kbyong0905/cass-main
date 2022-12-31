@@ -16,7 +16,7 @@
 }
 
 body {
-		background-color: #effaf6;
+		background-color: #c8afff;
 }
 
 .circular_image {
@@ -45,29 +45,44 @@ body {
 				<div style="padding:20px">
 					<form>
 						<div>
-							<img class="circular_image" src="{{ image_url }}" style="width: 250px; text-align: center; border-radius: 50%;">  <br><br>
+							<img class="circular_image" src="{{ image_url }}" style="text-align: center;">
 							<label for="emp3" class="t2t">Profile Picture</label>
-							
+						</div>
+
+						<div>
 							<label for="emp1" class="t2t">Employee ID</label>
-							<br> <input id="emp1" class="input66" type="number" name="emp_id" value="{{ result[0] }}" readonly><br><br>
-							
+							<br> <input id="emp1" class="input66" type="number" name="emp_id" value="{{ result[0] }}" readonly>
+						</div>
+
+						<div>
 							<label for="emp2" class="t2t">First Name</label>
-							<input id="emp2" class="input66" type="text" name="first_name" value="{{ result[1] }}" readonly><br><br>
-		
+							<input id="emp2" class="input66" type="text" name="first_name" value="{{ result[1] }}" readonly>
+						</div>
+
+						<div>
 							<label for="emp3" class="t2t">Last Name</label>
-							<input id="emp3" class="input66" type="text" name="last_name" value="{{ result[2] }}" readonly><br><br>
-							
+							<input id="emp3" class="input66" type="text" name="last_name" value="{{ result[2] }}" readonly>
+						</div>
+
+						<div>
 							<label for="emp4" class="t2t">Primary Skill</label>
-							<input id="emp4" class="input66" type="text" name="pri_skill" value="{{ result[3] }}" readonly><br><br>
+							<input id="emp4" class="input66" type="text" name="pri_skill" value="{{ result[3] }}" readonly>
+						</div>
 							
+						<div>
 							<label for="emp5" class="t2t">Location</label>
-							<input id="emp5" class="input66" type="text" name="location" value="{{ result[4] }}" readonly><br><br>
-
+							<input id="emp5" class="input66" type="text" name="location" value="{{ result[4] }}" readonly>
+						</div>	
+						
+						<div>
 							<label for="emp6" class="t2t">Status</label>
-							<input id="emp6" class="input66" type="text" name="location" value="{{ result[5] }}" readonly><br><br>
+							<input id="emp6" class="input66" type="text" name="location" value="{{ result[5] }}" readonly>
+						</div>
 
-							  <button type="submit" class="btn btn-primary" formaction="\EditEmp">EDIT EMPLOYEE INFORMATION</button><br><br>
-						  </div>
+						<div>
+							<button type="submit" class="btn btn-primary" formaction="\EditEmp">EDIT EMPLOYEE INFORMATION</button>
+						</div>
+		
 					</form>
 				</div>
 			</div>
