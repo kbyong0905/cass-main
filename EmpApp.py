@@ -192,8 +192,8 @@ def EditStaff():
             cursor.close()
 
 
-        select_stmt = "SELECT * FROM employee WHERE emp_id = %s"
-        cursor = db_conn.cursor()
+    select_stmt = "SELECT * FROM employee WHERE emp_id = %s"
+    cursor = db_conn.cursor()
             
     try:
         cursor.execute(select_stmt, emp_id)
@@ -227,6 +227,7 @@ def EditStaff():
         return str(e)
 
     print(object_url)
+    print(emp_id)
     return render_template('GetEmpOutput.html', result=result, image_url=object_url)
 
 
