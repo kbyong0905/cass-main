@@ -138,8 +138,7 @@ def getEmp():
 def getEmpDone():
     
     return render_template('GetEmp.html')
-
-
+    
 @app.route("/update", methods=['POST'])
 def EditStaff():
     emp_id= request.form['emp_id']
@@ -186,7 +185,6 @@ def EditStaff():
                 s3_location = ''
             else:
                 s3_location = '-' + s3_location
-                object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(s3_location,custombucket,image_file_name)
         except Exception as e:
             return str(e)
         
