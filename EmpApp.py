@@ -142,6 +142,7 @@ def getEmpDone():
     
     return render_template('GetEmp.html')
 
+
 @app.route("/update", methods=['POST'])
 def EditStaff():
     staffID= request.form['getStaffID']
