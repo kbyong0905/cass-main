@@ -203,6 +203,19 @@ def EditStaff():
 def editEmpDone():
     
     return render_template('EditEmp.html')
+    
+@app.route('/delete/<string:ID>',methods=['POST','GET'])
+def delete(ID):
+    s3_client = boto3.client("s3")
+    image_file_name = "staff-id-" + str(ID) + "_image_file"
+    response = s3_client.delete_object(Bucket=custombucket, Key=image_file_name)
+    delete_sql = "DELETE FROM staff WHERE StaffID=%s"
+    cursor = db_conn.cursor()
+    cursor.execute(delete_sql, (ID))
+    db_conn.commit()
+    titleData = "Data deleted"
+    return render_template('StaffOutput.html',title=titleData)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
