@@ -1,18 +1,51 @@
 <!DOCTYPE html>
 <html>
+<style>
+.input66{
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid;
+}
+
+.t2t{
+  text-align: left;
+  margin: 0px 5px;
+}
+
+body {
+		background-color: #effaf6;
+}
+
+.circular_image {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: blue;
+  display:inline-block;
+  vertical-align:middle;
+}
+.circular_image img{
+  width:100%;
+}
+</style>
 <head>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<title>Employee Information</title>
 </head>
 <body style="text-align: center;">
 
-		<h1 style="padding-top: 50px;">Employee Information</h1>
+		<h1 style="color:#007400; font-weight: bold; font-style: italic; text-align: center;">EMPLOYEE INFORMATION</h1>
+		<h1 style="padding-top: 50px;"></h1>
 		<div class="h-100 d-flex align-items-center justify-content-center">
-			<div style="background-color: rgb(193, 193, 193); width: 50%; margin: 50px 5; border-radius: 5px;">
+			<div style="background-color: #ffffff; width: 50%; margin: 50px 5; border-radius: 5px;">
 				<div style="padding:20px">
 					<form>
 						<div>
-							<img src="{{ image_url }}" style="width: 250px; text-align: center; border-radius: 50%;">  <br><br>
+							<img class="circular_image" src="{{ image_url }}" style="width: 250px; text-align: center; border-radius: 50%;">  <br><br>
 							<label for="emp3" class="t2t">Profile Picture</label>
 							
 							<label for="emp1" class="t2t">Employee ID</label>

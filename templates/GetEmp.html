@@ -1,9 +1,31 @@
 <!DOCTYPE html>
 <html>
 <style>
+.input66{
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid;
+}
+
+.t2t{
+  text-align: left;
+  margin: 0px 5px;
+}
+
+body {
+		background-color: #effaf6;
+	}
+
+h1{
+		text-shadow: 1px 1px 2px #000000;
+	}
+
   .navbar{
     font-size: large;
-    background-color: #e1eedd;
+    background-color: #ffffff;
   }
   </style>
 <head>
@@ -12,21 +34,22 @@
   <h1 style="color:#007400; font-weight: bold; font-style: italic; text-align: center;">EMPLOYEE DATABASE</h1>
 
 </head>
-<body style="background-color: #fefbe9;">
+<body>
 	<br><p style="text-align: center; font-size: 2em; color: #183a1d; font-family: 'SaolDisplay', serif;">Employee Information</p>
 
-	<div style="background-color: #e1eedd; color: #183a1d; width: 50%; margin: 10px auto; border-radius: 5px;">
+	<div style="background-color: #ffffff; color: #183a1d; width: 50%; margin: 10px auto; border-radius: 5px;">
 		<div style="padding: 20px; text-align: center;">
 			
 			<form action="/fetchdata" autocomplete="on" method="POST">
 	
 				<h3 style="color: #183a1d; font-family: 'SaolDisplay', serif;">Enter Employee ID</h3><br>
-	
-				Employee ID: <input style="width: 50%; padding: 8px; border-radius: 5px; border: 1px solid;" type="number" name="emp_id" autofocus size="40">
+				<label for="emp2" class="t2t">Employee ID</label>
+ 				<input id="emp2" class="input66" style="height:25px;font-size:14pt;color:grey; width: 50%; padding: 8px; border-radius: 5px; border: 1px solid;" 
+				type="number" name="emp_id" autofocus size="40" placeholder="Employee ID">
 	
 				<button type="submit" class="btn btn-success">FETCH INFO</button><br><br>
 	
-				<button type="submit" formaction="/addemp" class="btn btn-info">GO TO HOME PAGE</button>
+				<button type="submit" formaction="/addemp" class="btn btn-info">BACK TO HOME PAGE</button>
 	
 			</form>
 		</div>
