@@ -34,6 +34,10 @@ def about():
 def getemp():
     return render_template('GetEmp.html')
 
+@app.route("/update", methods=['GET', 'POST'])
+def editemp():
+    return render_template('EditEmp.html')
+
 @app.route("/addemp", methods=['POST'])
 def AddEmp():
     emp_id = request.form['emp_id']
@@ -132,47 +136,11 @@ def getEmp():
 
      return render_template('GetEmpOutput.html', result=result, image_url=object_url)
 
-
-@app.route("/fetcheditdata",methods=['GET','POST'])
-def getEmp():
-     emp_id = request.form['emp_id']
-
-     select_stmt = "SELECT * FROM employee WHERE emp_id = %(emp_id)s"
-     cursor = db_conn.cursor()
-            
-     try:
-         cursor.execute(select_stmt, { 'emp_id': int(emp_id) })
-         for result in cursor:
-            print(result)
-
-     except Exception as e:
-        return str(e)
-        
-     finally:
-        cursor.close()
-
-        emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
-        s3 = boto3.resource('s3')
-
-        try:
-            print("Data inserted in MySQL RDS... uploading image to S3...")
-            bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
-            s3_location = (bucket_location['LocationConstraint'])
-
-            if s3_location is None:
-                s3_location = ''
-            else:
-                s3_location = '-' + s3_location
-
-            object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
-                s3_location,
-                custombucket,
-                emp_image_file_name_in_s3)
-
-        except Exception as e:
-            return str(e)
-
-     return render_template('GetEmpOutput.html', result=result, image_url=object_url)
+# Get Employee Done
+@app.route("/fetchdata/",methods=['GET','POST'])
+def getEmpDone():
+    
+    return render_template('GetEmp.html')
 
 @app.route("/update", methods=['POST'])
 def EditStaff():
@@ -203,12 +171,12 @@ def EditStaff():
         try:
             
             # Upload image file in S3 #
-            image_file_name = "staff-id-" + str(staffID) + "_image_file"
+            image_file_name = "emp-id-" + str(staffID) + "_image_file"
             s3 = boto3.resource('s3')
 
-            insert_sql = "UPDATE staff SET Name=%s, Email=%s, Phone=%s,RoleID=%s,DepartmentID=%s,Salary=%s,Status=%s WHERE StaffID=%s"
+            insert_sql = "UPDATE staff SET first_name=%s, last_name=%s, pri_skill=%s, location=%s, Status=%s WHERE StaffID=%s"
             cursor = db_conn.cursor()
-            cursor.execute(insert_sql, (name, email, phone, role,department,salary,status,staffID))
+            cursor.execute(insert_sql, (first_name, last_name, pri_skill, location,status,staffID))
             db_conn.commit()
             
             print("Data inserted in MySQL RDS... uploading image to S3...")
@@ -228,13 +196,8 @@ def EditStaff():
             cursor.close()
             
     titleData = "Data Updated"
-    return render_template('StaffOutput.html',title=titleData)
+    return render_template('EditEmpOutput.html',title=titleData)
 
-# Get Employee Done
-@app.route("/fetchdata/",methods=['GET','POST'])
-def getEmpDone():
-    
-    return render_template('GetEmp.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
