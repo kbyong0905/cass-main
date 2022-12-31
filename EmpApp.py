@@ -34,7 +34,7 @@ def about():
 def getemp():
     return render_template('GetEmp.html')
 
-@app.route("/update", methods=['GET', 'POST'])
+@app.route("/editemp", methods=['GET', 'POST'])
 def editemp():
     return render_template('EditEmp.html')
 
