@@ -226,6 +226,7 @@ def EditStaff():
     except Exception as e:
         return str(e)
 
+    print(object_url)
     return render_template('GetEmpOutput.html', result=result, image_url=object_url)
 
 
