@@ -191,11 +191,7 @@ def EditStaff():
             cursor.execute(insert_sql, (first_name, last_name, pri_skill, location, status, emp_id))
             db_conn.commit()
             cursor.close()
-                
-
-        except Exception as e:
-            return str(e)
-            
+              
         finally:
             cursor.close()
 
@@ -225,7 +221,6 @@ def EditStaff():
             s3.Bucket(custombucket).put_object(Key=image_file_name, Body=edit_image)
             bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
             s3_location = (bucket_location['LocationConstraint'])
-            
             
         finally:
             cursor.close()
