@@ -34,14 +34,24 @@ def about():
 def getemp():
     resultdata= ""
     
-    select_stmt = "SELECT * FROM employee"
-    cursor = db_conn.cursor()
-         
     try:
-        cursor.execute(select_stmt)
+        cursor = db_conn.cursor()          
+        insert_sql = "SELECT * FROM employee WHERE emp_id = %(emp_id)s"
+        cursor.execute(insert_sql)
         resultdata=cursor.fetchall()
+        cursor.close()
         for resultEmp in cursor:
             print(resultEmp)
+        
+            
+    except:
+        db_conn.ping()
+        cursor = db_conn.cursor() 
+        insert_sql = "SELECT * FROM employee WHERE emp_id = %(emp_id)s"
+        cursor.execute(insert_sql)
+        resultdata=cursor.fetchall()
+        cursor.close()
+        cursor.close()
 
     except Exception as e:
         return str(e)
@@ -68,7 +78,6 @@ def AddEmp():
         getID=0
         
         try:
-            db_conn.ping()
             cursor = db_conn.cursor()
             insert_sql = "INSERT INTO employee VALUES ( %s, %s, %s, %s, 'Active')"
             cursor.execute(insert_sql, first_name, last_name, pri_skill, location))
