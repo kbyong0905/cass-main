@@ -51,15 +51,11 @@ def getemp():
         cursor.execute(insert_sql)
         resultdata=cursor.fetchall()
         cursor.close()
-        cursor.close()
 
-    except Exception as e:
-        return str(e)
         
     finally:
         cursor.close()
-
-    return render_template('GetEmp.html', result=resultdata)
+        return render_template('GetEmp.html', result=resultdata)
 
 
 @app.route("/addemp", methods=['POST'])
