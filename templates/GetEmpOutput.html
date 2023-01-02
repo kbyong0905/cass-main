@@ -57,7 +57,7 @@ h1{
 						
 						<label for="emp1" class="t2t">Employee ID:</label>
 						<br> <input id="emp1" class="input66" type="number" name="emp_id" 
-						style="height:25px;font-size:14pt;color: black;" value="{{ result[0] }}" readonly><br>
+						style="height:25px;font-size:14pt;color: black;" value="{{ result[0] }}" disabled><br>
 
 						<label for="emp2" class="t2t">First Name:</label>
 						<input id="emp2" class="input66" type="text" name="first_name" 
@@ -87,7 +87,7 @@ h1{
 
 					<form action="/delete/{{ result[0] }}" autocomplete="on" method = "POST" enctype="multipart/form-data">
 						<div style="text-align: center; margin-top: 10px;">
-							<button type="submit" class="btn btn-success"
+							<button type="submit" class="btn btn-warning"
 							style="height:50px;font-size:14pt;color:white;width: 60%;">DELETE EMPLOYEE INFORMATION</button>
 						</div>
 					</form>
