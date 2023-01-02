@@ -35,6 +35,7 @@ h1{
 </style>
 <head>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 	<title>Employee Information</title>
 </head>
 <body style="background-color: #94abbd;">
@@ -117,15 +118,50 @@ h1{
             		$('#status').val("{{ result [5] }}");
 		});
       	});
-	 $('#DelEmp').submit(function() {
-	   var status = confirm("Click OK to continue?");
-	   if(status == false){
-		return false;
-		}
-	   else{
-		return true; 
-		}
-	});
+	 $(document).on('click', '.deleteFunction', function(){  
+	    var getEmpID = $('#emp_id').val("{{ result [0] }}");
+	    var getFName = $('#status').val("{{ result [1] }}");
+	    var getLName = $('#status').val("{{ result [2] }}");
+            Swal.fire({
+              title: 'Are you sure for deleting'+getFName+getLName'?',
+              text: "You won't be able to revert this!",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#d33',
+              cancelButtonColor: '#8f9494',
+              confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                  let timerInterval
+                    Swal.fire({
+                    title: 'Record deleted',
+                    icon: 'success',
+                    html: 'The '+getName+' has been deleted.', //text
+                    timer: 5000,// 1000 = 1second
+                    timerProgressBar: true,//timerProgressBar
+                    confirmButtonText:'Ok',//ConfirmButton show with text 'Ok'
+                    onBeforeOpen: () => {
+                    //	Swal.showLoading()
+                        timerInterval = setInterval(() => {
+                        const content = Swal.getContent()
+                        if (content) {
+                            const b = content.querySelector('b')
+                            if (b) {
+                                b.textContent = Math.ceil(swal.getTimerLeft() / 1000) //to get second for text
+                            }
+                        }
+                        }, 1000)
+                    },
+                    onClose: () => {
+                        clearInterval(timerInterval)
+                    }
+                    }).then((result) => {
+                        //timer
+                        window.location.href="/delete/"+getEmpID;
+                    })
+              }
+            })
+      	});
 	</script>
 </body>
 </html>
