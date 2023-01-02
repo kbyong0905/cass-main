@@ -45,8 +45,10 @@ h1{
 				type="number" name="emp_id" min="1" autofocus size="40" placeholder="Employee ID"> -->
 				<div>
 					<select class="custom-select" id="emp_id" name="emp_id">
-						<option selected value="">Choose Employee ID</option>
-						<option value="{{ result [0] }}">{{ result [0] }}</option>
+						{% for rowEmp in result %}
+							<option selected value="">Choose Employee ID</option>
+							<option value="{{ rowEmp.0 }}">{{ rowEmp.1 }}</option>
+						{% endfor %}
 					</select>
 				</div>
 
