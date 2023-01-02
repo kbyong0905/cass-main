@@ -251,7 +251,7 @@ def delete(ID):
     cursor = db_conn.cursor()
     cursor.execute(delete_sql, (ID))
     db_conn.commit()
-    return render_template('GetEmp.html')
+    return render_template('AddEmp.html')
 
 
 if __name__ == '__main__':
