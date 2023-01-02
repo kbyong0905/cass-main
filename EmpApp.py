@@ -171,6 +171,8 @@ def getEmp():
 
 @app.route("/update", methods=['POST'])
 def EditStaff():
+    object_url=""
+    resultdata=""
     emp_id= request.form['emp_id']
     first_name = request.form['first_name']
     last_name = request.form['last_name']
@@ -185,6 +187,7 @@ def EditStaff():
             cursor = db_conn.cursor()
             insert_sql = "UPDATE employee SET first_name= %s, last_name=%s, pri_skill=%s, location=%s, status=%s WHERE emp_id = %s"
             cursor.execute(insert_sql, (first_name, last_name, pri_skill, location, status, emp_id))
+            resultdata=cursor.fetchall()
             db_conn.commit()
             cursor.close()
             
@@ -193,6 +196,7 @@ def EditStaff():
             cursor = db_conn.cursor()
             insert_sql = "UPDATE employee SET first_name= %s, last_name=%s, pri_skill=%s, location=%s, status=%s WHERE emp_id = %s"
             cursor.execute(insert_sql, (first_name, last_name, pri_skill, location, status, emp_id))
+            resultdata=cursor.fetchall()
             db_conn.commit()
             cursor.close()
               
@@ -251,7 +255,7 @@ def EditStaff():
 
     print(object_url)
     print(emp_id)
-    return render_template('GetEmpOutput.html', result=result, image_url=object_url)
+    return render_template('GetEmpOutput.html', result=resultdata, image_url=object_url)
 
 
 # Edit Employee Done
