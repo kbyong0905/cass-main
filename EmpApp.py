@@ -126,10 +126,9 @@ def AddEmp():
 # Get Employee Information
 @app.route("/fetchdata",methods=['GET','POST'])
 def getEmp():
-     emp_id = request.form['emp_id']
-            
+    emp_id = request.form['emp_id']
+        
     try:
-        db_conn.ping()
         cursor = db_conn.cursor()
         insert_sql = "SELECT * FROM employee WHERE emp_id = %(emp_id)s"
         cursor.execute(select_stmt, { 'emp_id': int(emp_id) })
