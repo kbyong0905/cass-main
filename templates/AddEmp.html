@@ -41,24 +41,20 @@ h1{
         
 				Profile Picture: <input type=file id="img_btn" name="emp_image_file" style="height:25px;font-size:14pt;color: black;" > <br>
 
-        <label for="emp1" class="t2t">Employee ID</label>
-				<br> <input id="emp1" class="input66" type="number" name="emp_id" min="1" style="height:25px;font-size:14pt;color: black;"
-        autofocus size="40" placeholder="Employee ID" ><br>
-
-        <label for="emp2" class="t2t">First Name</label>
-		  	<input id="emp2" class="input66" type="text" name="first_name" style="height:25px;font-size:14pt;color: black;"
+        <label for="emp1" class="t2t">First Name</label>
+		  	<input id="emp2=1" class="input66" type="text" name="first_name" style="height:25px;font-size:14pt;color: black;"
         placeholder="First Name" ><br>
 
-        <label for="emp3" class="t2t">Last Name</label>
-		  	<input id="emp3" class="input66" type="text" name="last_name" style="height:25px;font-size:14pt;color: black;"
+        <label for="emp2" class="t2t">Last Name</label>
+		  	<input id="emp2" class="input66" type="text" name="last_name" style="height:25px;font-size:14pt;color: black;"
         placeholder="Last Name" ><br>
 
-        <label for="emp4" class="t2t">Primary Skills</label>
-		  	<input id="emp4" class="input66" type="text" name="pri_skill" style="height:25px;font-size:14pt;color: black;"
+        <label for="emp3" class="t2t">Primary Skills</label>
+		  	<input id="emp3" class="input66" type="text" name="pri_skill" style="height:25px;font-size:14pt;color: black;"
         placeholder="Primary Skill"><br>
 
-        <label for="emp5" class="t2t">Location</label>
-		  	<input id="emp5" class="input66" type="text" name="location" style="height:25px;font-size:14pt;color: black;" 
+        <label for="emp4" class="t2t">Location</label>
+		  	<input id="emp4" class="input66" type="text" name="location" style="height:25px;font-size:14pt;color: black;" 
         placeholder="Location" ><br>
 
         
@@ -89,10 +85,7 @@ h1{
   <script>
 	function validateAddEmp(){
 		valid=true;
-		if(document.AddEmp.emp_id.value=="" || document.AddEmp.emp_id.value==null){
-		  Swal.fire("Employee ID cannot be blank", "Please enter Employee's ID", "error");
-		    valid=false;
-		}else if(document.AddEmp.first_name.value=="" || document.AddEmp.first_name.value==null){
+		if(document.AddEmp.first_name.value=="" || document.AddEmp.first_name.value==null){
 		   Swal.fire("First name cannot be blank", "Please enter Employee's First name", "error");
 		     valid=false;
 		 }else if(document.AddEmp.last_name.value=="" || document.AddEmp.last_name.value==null){
