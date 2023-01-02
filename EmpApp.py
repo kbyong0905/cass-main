@@ -105,14 +105,12 @@ def AddEmp():
 @app.route("/fetchdata",methods=['GET','POST'])
 def getEmp():
      emp_id = request.form['emp_id']
-     result= ""
     
      select_stmt = "SELECT * FROM employee WHERE emp_id = %(emp_id)s"
      cursor = db_conn.cursor()
             
      try:
          cursor.execute(select_stmt, { 'emp_id': int(emp_id) })
-         result=cursor.fetchall()
          for result in cursor:
             print(result)
 
