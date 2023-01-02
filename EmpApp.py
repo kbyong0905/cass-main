@@ -119,11 +119,9 @@ def AddEmp():
         except Exception as e:
             return str(e)
 
-        finally:
-            cursor.close()
-
-    print("all modification done...")
-    return render_template('AddEmpOutput.html', name=emp_name)
+    finally:
+        cursor.close()
+        return render_template('AddEmpOutput.html', name=emp_name)
 
 # Get Employee Information
 @app.route("/fetchdata",methods=['GET','POST'])
