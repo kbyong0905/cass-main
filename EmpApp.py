@@ -143,7 +143,7 @@ def getEmp():
         for result in cursor:
            print(result
                  
-    except:
+     except:
         db_conn.ping()
         cursor = db_conn.cursor()          
         insert_sql = "SELECT * FROM employee WHERE emp_id = %(emp_id)s"
