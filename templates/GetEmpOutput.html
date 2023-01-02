@@ -93,7 +93,7 @@ h1{
 						</div>
 					</form>
 
-					<form name="DelEmp" action="/delete/{{ result[0] }}" autocomplete="on" method = "POST" enctype="multipart/form-data">
+					<form action="/delete/{{ result[0] }}" autocomplete="on" method = "POST" enctype="multipart/form-data">
 						<div style="text-align: center; margin-top: 10px;">
 							<button type="submit" class="btn btn-danger deleteFunction" 
 							style="height:50px;font-size:14pt;color:white;width: 60%;">DELETE EMPLOYEE INFORMATION</button>
@@ -118,12 +118,13 @@ h1{
             		$('#status').val("{{ result [5] }}");
 		});
       	});
+		
 	 $(document).on('click', '.deleteFunction', function(){  
-	    var getEmpID = $('#emp_id').val("{{ result [0] }}");
-	    var getFName = $('#status').val("{{ result [1] }}");
-	    var getLName = $('#status').val("{{ result [2] }}");
+            var getEmpID = $('#emp_id').val("{{ result [0] }}");
+	    var getFName = $('#first_name').val("{{ result [1] }}");
+	    var getLName = $('#last_name').val("{{ result [2] }}");
             Swal.fire({
-              title: 'Are you sure for deleting'+getFName+getLName'?',
+              title: 'Are you sure for deleting '+getFName+getLName+'?',
               text: "You won't be able to revert this!",
               icon: 'warning',
               showCancelButton: true,
@@ -136,7 +137,7 @@ h1{
                     Swal.fire({
                     title: 'Record deleted',
                     icon: 'success',
-                    html: 'The '+getName+' has been deleted.', //text
+                    html: 'The '+getFName+getLName+' has been deleted.', //text
                     timer: 5000,// 1000 = 1second
                     timerProgressBar: true,//timerProgressBar
                     confirmButtonText:'Ok',//ConfirmButton show with text 'Ok'
@@ -161,7 +162,7 @@ h1{
                     })
               }
             })
-      	});
+      });
 	</script>
 </body>
 </html>
