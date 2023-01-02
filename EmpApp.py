@@ -60,6 +60,7 @@ def getemp():
 
 @app.route("/addemp", methods=['POST'])
 def AddEmp():
+    emp_name = ""
     first_name = request.form['first_name']
     last_name = request.form['last_name']
     pri_skill = request.form['pri_skill']
@@ -91,10 +92,10 @@ def AddEmp():
             db_conn.commit()
             cursor.close()
             
-    emp_name = "" + first_name + " " + last_name
-    # Uplaod image file in S3 #
-    emp_image_file_name_in_s3 = "emp-id-" + str(getID) + "_image_file"
-    s3 = boto3.resource('s3')
+        emp_name = "" + first_name + " " + last_name
+        # Uplaod image file in S3 #
+        emp_image_file_name_in_s3 = "emp-id-" + str(getID) + "_image_file"
+        s3 = boto3.resource('s3')
         
         try:
             print("Data inserted in MySQL RDS... uploading image to S3...")
@@ -117,7 +118,8 @@ def AddEmp():
 
     finally:
         cursor.close()
-        return render_template('AddEmpOutput.html', name=emp_name)
+        
+    return render_template('AddEmpOutput.html', name=emp_name)
 
 # Get Employee Information
 @app.route("/fetchdata",methods=['GET','POST'])
@@ -162,7 +164,8 @@ def getEmp():
 
     finally:
         cursor.close()
-        return render_template('GetEmpOutput.html', result=result, image_url=object_url)
+        
+    return render_template('GetEmpOutput.html', result=result, image_url=object_url)
 
 
 @app.route("/update", methods=['POST'])
