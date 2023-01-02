@@ -123,13 +123,13 @@ def AddEmp():
 # Get Employee Information
 @app.route("/fetchdata",methods=['GET','POST'])
 def getEmp():
+    resultdata= ""
     emp_id = request.form['emp_id']
         
     try:
-        cursor = db_conn.cursor()
         insert_sql = "SELECT * FROM employee WHERE emp_id = %(emp_id)s"
         cursor.execute(insert_sql, { 'emp_id': int(emp_id) })
-        db_conn.commit()
+        resultdata=cursor.fetchall()
         cursor.close()
 
     except:
@@ -137,6 +137,7 @@ def getEmp():
         cursor = db_conn.cursor()          
         insert_sql = "SELECT * FROM employee WHERE emp_id = %(emp_id)s"
         cursor.execute(insert_sql, { 'emp_id': int(emp_id) })
+        resultdata=cursor.fetchall()
         db_conn.commit()
         cursor.close()
 
@@ -164,7 +165,7 @@ def getEmp():
     finally:
         cursor.close()
         
-    return render_template('GetEmpOutput.html', result=result, image_url=object_url)
+    return render_template('GetEmpOutput.html', result=resultdata, image_url=object_url)
 
 
 @app.route("/update", methods=['POST'])
