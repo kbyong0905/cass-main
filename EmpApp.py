@@ -128,7 +128,8 @@ def getEmp():
 
         except Exception as e:
             return str(e)
-
+        
+#      return render_template('GetEmp.html', emp_id= emp_id, first_name=first_name , last_name=last_name , pri_skill=pri_skill , location=location, image_url=object_url)
      return render_template('GetEmpOutput.html', result=result, image_url=object_url)
 
 # Get Employee Done
