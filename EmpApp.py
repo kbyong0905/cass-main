@@ -35,7 +35,7 @@ def getemp():
     resultdata= ""
     
     try:      
-        insert_sql = "SELECT * FROM employee WHERE emp_id = %(emp_id)s"
+        insert_sql = "SELECT * FROM employee"
         cursor.execute(insert_sql)
         resultdata=cursor.fetchall()
         cursor.close()
@@ -46,7 +46,7 @@ def getemp():
     except:
         db_conn.ping()
         cursor = db_conn.cursor() 
-        insert_sql = "SELECT * FROM employee WHERE emp_id = %(emp_id)s"
+        insert_sql = "SELECT * FROM employee"
         cursor.execute(insert_sql)
         resultdata=cursor.fetchall()
         cursor.close()
