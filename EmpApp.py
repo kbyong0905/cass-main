@@ -32,7 +32,25 @@ def about():
 
 @app.route("/getemp", methods=['GET', 'POST'])
 def getemp():
-    return render_template('GetEmp.html')
+     result= ""
+    
+     select_stmt = "SELECT * FROM employee"
+     cursor = db_conn.cursor()
+            
+     try:
+         cursor.execute(select_stmt)
+         result=cursor.fetchall()
+         for result in cursor:
+            print(result)
+
+     except Exception as e:
+        return str(e)
+        
+     finally:
+        cursor.close()
+
+       
+    return render_template('GetEmp.html', result=result)
 
 
 @app.route("/addemp", methods=['POST'])
