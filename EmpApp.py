@@ -34,8 +34,7 @@ def about():
 def getemp():
     resultdata= ""
     
-    try:
-        cursor = db_conn.cursor()          
+    try:      
         insert_sql = "SELECT * FROM employee WHERE emp_id = %(emp_id)s"
         cursor.execute(insert_sql)
         resultdata=cursor.fetchall()
@@ -76,7 +75,7 @@ def AddEmp():
         
         try:
             cursor = db_conn.cursor()
-            insert_sql = "INSERT INTO employee VALUES ( %s, %s, %s, %s, 'Active')"
+            insert_sql = "INSERT INTO employee(first_name, last_name, pri_skill, location, status) VALUES ( %s, %s, %s, %s, 'Active')"
             cursor.execute(insert_sql, (first_name, last_name, pri_skill, location))
             getID= cursor.lastrowid
             db_conn.commit()
@@ -86,7 +85,7 @@ def AddEmp():
         except:
             db_conn.ping()
             cursor = db_conn.cursor() 
-            insert_sql = "INSERT INTO employee VALUES ( %s, %s, %s, %s, 'Active')"
+            insert_sql = "INSERT INTO employee(first_name, last_name, pri_skill, location, status) VALUES ( %s, %s, %s, %s, 'Active')"
             cursor.execute(insert_sql, (first_name, last_name, pri_skill, location))
             getID= cursor.lastrowid
             db_conn.commit()
