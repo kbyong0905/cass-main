@@ -128,7 +128,7 @@ def getEmp():
     try:
         cursor = db_conn.cursor()
         insert_sql = "SELECT * FROM employee WHERE emp_id = %(emp_id)s"
-        cursor.execute(select_stmt, { 'emp_id': int(emp_id) })
+        cursor.execute(insert_sql, { 'emp_id': int(emp_id) })
         db_conn.commit()
         cursor.close()
 
@@ -136,7 +136,7 @@ def getEmp():
         db_conn.ping()
         cursor = db_conn.cursor()          
         insert_sql = "SELECT * FROM employee WHERE emp_id = %(emp_id)s"
-        cursor.execute(select_stmt, { 'emp_id': int(emp_id) })
+        cursor.execute(insert_sql, { 'emp_id': int(emp_id) })
         db_conn.commit()
         cursor.close()
 
