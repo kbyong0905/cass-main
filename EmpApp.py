@@ -135,8 +135,6 @@ def getEmp():
             cursor.execute(select_stmt, { 'emp_id': int(emp_id) })
             db_conn.commit()
             cursor.close()
-            for result in cursor:
-               print(result
 
         except:
             db_conn.ping()
