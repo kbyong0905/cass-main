@@ -80,7 +80,7 @@ def AddEmp():
         try:
             cursor = db_conn.cursor()
             insert_sql = "INSERT INTO employee VALUES ( %s, %s, %s, %s, 'Active')"
-            cursor.execute(insert_sql, first_name, last_name, pri_skill, location)
+            cursor.execute(insert_sql, (first_name, last_name, pri_skill, location))
             getID= cursor.lastrowid
             db_conn.commit()
             cursor.close()
@@ -90,7 +90,7 @@ def AddEmp():
             db_conn.ping()
             cursor = db_conn.cursor() 
             insert_sql = "INSERT INTO employee VALUES ( %s, %s, %s, %s, 'Active')"
-            cursor.execute(insert_sql, first_name, last_name, pri_skill, location)
+            cursor.execute(insert_sql, (first_name, last_name, pri_skill, location))
             getID= cursor.lastrowid
             db_conn.commit()
             cursor.close()
@@ -191,7 +191,7 @@ def EditStaff():
             db_conn.ping()
             cursor = db_conn.cursor()
             insert_sql = "UPDATE employee SET first_name= %s, last_name=%s, pri_skill=%s, location=%s, status=%s WHERE emp_id = %s"
-            cursor.execute(insert_sql, (first_name, last_name, pri_skill, location, status, emp_id)
+            cursor.execute(insert_sql, (first_name, last_name, pri_skill, location, status, emp_id))
             db_conn.commit()
             cursor.close()
             
@@ -199,7 +199,7 @@ def EditStaff():
             db_conn.ping()
             cursor = db_conn.cursor()
             insert_sql = "UPDATE employee SET first_name= %s, last_name=%s, pri_skill=%s, location=%s, status=%s WHERE emp_id = %s"
-            cursor.execute(insert_sql, (first_name, last_name, pri_skill, location, status, emp_id)
+            cursor.execute(insert_sql, (first_name, last_name, pri_skill, location, status, emp_id))
             db_conn.commit()
             cursor.close()
                 
@@ -220,7 +220,7 @@ def EditStaff():
 
             insert_sql = "UPDATE employee SET first_name=%s, last_name=%s, pri_skill=%s, location=%s, status=%s WHERE emp_id = %s"
             cursor = db_conn.cursor()
-            cursor.execute(insert_sql, (first_name, last_name, pri_skill, location, status, emp_id)
+            cursor.execute(insert_sql, (first_name, last_name, pri_skill, location, status, emp_id))
             db_conn.commit()
             
             print("Data inserted in MySQL RDS... uploading image to S3...")
