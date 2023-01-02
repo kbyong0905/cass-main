@@ -88,13 +88,13 @@ h1{
   <script>
 	function validateAddEmp(){
 		valid=true;
-		if(document.AddEmp.emp_id.value=="" || document.AddStaff.emp_id.value==null){
+		if(document.AddEmp.emp_id.value=="" || document.AddEmp.emp_id.value==null){
 		  Swal.fire("Employee ID cannot be blank", "Please enter Employee's ID", "error");
 		    valid=false;
-		}else if(document.AddEmp.first_name.value=="" || document.AddStaff.first_name.value==null){
+		}else if(document.AddEmp.first_name.value=="" || document.AddEmp.first_name.value==null){
 		   Swal.fire("First name cannot be blank", "Please enter Employee's First name", "error");
 		     valid=false;
-		 }else if(document.AddEmp.last_name.value=="" || document.AddStaff.last_name.value==null){
+		 }else if(document.AddEmp.last_name.value=="" || document.AddEmp.last_name.value==null){
 		   Swal.fire("Last name cannot be blank", "Please enter  Employee's Last name", "error");
 		     valid=false;
 		 }else if(document.AddEmp.pri_skill.value==""){
@@ -103,11 +103,11 @@ h1{
 		}else if(document.AddEmp.location.value==""){
 		  Swal.fire("Location cannot be blank", "Please select the Employee's Location", "error");
 		    valid=false;
-		}else if(document.AddEmp.image.value==""){
+		}else if(document.AddEmp.emp_image_file.value==""){
 		   Swal.fire("Image cannot be blank", "Please choose a file to upload", "error");
 		     valid=false;
 		 }
-		  return valid;
+		 return valid;
     }
   </script>
 	</body>
