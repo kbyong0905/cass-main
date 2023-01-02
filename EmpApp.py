@@ -123,6 +123,7 @@ def AddEmp():
 # Get Employee Information
 @app.route("/fetchdata",methods=['GET','POST'])
 def getEmp():
+    object_url=""
     resultdata= ""
     emp_id = request.form['emp_id']
         
