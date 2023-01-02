@@ -40,14 +40,24 @@ h1{
 			<form action="/fetchdata" autocomplete="on" method="POST">
 	
 				<h3 style="color: #183a1d; font-family: 'SaolDisplay', serif;">Enter Employee ID</h3><br>
-				<label for="emp2" class="t2t">Employee ID</label>
- 				<input id="emp2" class="input66" style="height:25px;font-size:14pt;color: black; width: 50%; padding: 8px; border-radius: 5px; border: 1px solid;" 
-				type="number" name="emp_id" min="1" autofocus size="40" placeholder="Employee ID">
-	
-				<button type="submit" class="btn btn-success">FETCH INFO</button><br><br>
+				<label for="emp1" class="t2t">Employee ID:</label>
+ 				<!-- <input id="emp2" class="input66" style="height:25px;font-size:14pt;color: black; width: 50%; padding: 8px; border-radius: 5px; border: 1px solid;" 
+				type="number" name="emp_id" min="1" autofocus size="40" placeholder="Employee ID"> -->
+				<div>
+					<select class="custom-select" id="emp_id" name="emp_id">
+						<option selected value="">Choose Employee ID</option>
+						<option value="{{ result [0] }}">{{ result [0] }}</option>
+					</select>
+				</div>
+
+				<div style="text-align: center; margin-top: 10px;">
+					<button type="submit" class="btn btn-success"
+					style="height:50px;font-size:14pt;color:white;width: 40%;">FETCH INFO</button><br><br>
+				</div>
+				
 	
 				<button type="submit" formaction="http://54.159.195.114/:80/" class="btn btn-info"
-				style="height:50px;font-size:14pt;color:white;width: 70%;">BACK TO HOME PAGE</button>
+				style="height:50px;font-size:14pt;color:white;width: 60%;">BACK TO HOME PAGE</button>
 	
 			</form>
 		</div>
