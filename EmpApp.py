@@ -129,9 +129,6 @@ def AddEmp():
 @app.route("/fetchdata",methods=['GET','POST'])
 def getEmp():
      emp_id = request.form['emp_id']
-    
-     select_stmt = "SELECT * FROM employee WHERE emp_id = %(emp_id)s"
-     cursor = db_conn.cursor()
             
      try:
         db_conn.ping()
@@ -149,13 +146,6 @@ def getEmp():
         insert_sql = "SELECT * FROM employee WHERE emp_id = %(emp_id)s"
         cursor.execute(select_stmt, { 'emp_id': int(emp_id) })
         db_conn.commit()
-        cursor.close()
-    
-    
-     except Exception as e:
-        return str(e)
-        
-     finally:
         cursor.close()
 
         emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
