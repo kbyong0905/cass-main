@@ -230,6 +230,48 @@ def EditStaff():
             
         except Exception as e:
             return str(e)
+    object_url=""
+    resultdata= ""
+    emp_id = request.form['emp_id']
+        
+    try:
+        insert_sql = "SELECT * FROM employee WHERE emp_id = %(emp_id)s"
+        cursor.execute(insert_sql, { 'emp_id': int(emp_id) })
+        resultdata=cursor.fetchall()
+        cursor.close()
+
+    except:
+        db_conn.ping()
+        cursor = db_conn.cursor()          
+        insert_sql = "SELECT * FROM employee WHERE emp_id = %(emp_id)s"
+        cursor.execute(insert_sql, { 'emp_id': int(emp_id) })
+        resultdata=cursor.fetchall()
+        db_conn.commit()
+        cursor.close()
+
+    emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
+    s3 = boto3.resource('s3')
+    
+    try:
+        print("Data inserted in MySQL RDS... uploading image to S3...")
+        bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
+        s3_location = (bucket_location['LocationConstraint'])
+
+        if s3_location is None:
+            s3_location = ''
+        else:
+            s3_location = '-' + s3_location
+
+        object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
+            s3_location,
+            custombucket,
+            emp_image_file_name_in_s3)
+
+    except Exception as e:
+        return str(e)
+
+    finally:
+        cursor.close()
 
 
     return render_template('GetEmpOutput.html', result=resultdata, image_url=object_url)
