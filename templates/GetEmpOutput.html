@@ -55,50 +55,48 @@ h1{
 							<input type=file id="img_btn" name="emp_image_file" style="height:25px;font-size:14pt;color: black;" > <br>
 							<label style="text-align: center;">Profile Picture</label><br>
 						</div>
-						
-						<label for="emp1" class="t2t">Employee ID:</label>
-						<br> <input class="input66" type="number"
-						style="height:25px;font-size:14pt;color: black;" value="{{ result[0] }}" disabled><br>
-						
-						<input id="emp1" class="input66" type="hidden" name="emp_id" 
-						style="height:25px;font-size:14pt;color: black;" value="{{ result[0] }}">
+						{% for rowEmp in result %}
+							<label for="emp1" class="t2t">Employee ID:</label>
+							<br> <input class="input66" type="number"
+							style="height:25px;font-size:14pt;color: black;" value="{{ rowEmp.0 }}" disabled><br>
 
-						<label for="emp2" class="t2t">First Name:</label>
-						<input id="emp2" class="input66" type="text" name="first_name" 
-						style="height:25px;font-size:14pt;color: black;" value="{{ result[1] }}"><br>
+							<input id="emp1" class="input66" type="hidden" name="emp_id" 
+							style="height:25px;font-size:14pt;color: black;" value="{{ rowEmp.0 }}">
 
-						<label for="emp3" class="t2t">Last Name:</label>
-						<input id="emp3" class="input66" type="text" name="last_name" 
-						style="height:25px;font-size:14pt;color: black;" value="{{ result[2] }}"><br>
+							<label for="emp2" class="t2t">First Name:</label>
+							<input id="emp2" class="input66" type="text" name="first_name" 
+							style="height:25px;font-size:14pt;color: black;" value="{{ rowEmp.1 }}"><br>
 
-						<label for="emp4" class="t2t">Primary Skill:</label>
-						<input id="emp4" class="input66" type="text" name="pri_skill" 
-						style="height:25px;font-size:14pt;color: black;" value="{{ result[3] }}"><br>
-							
-						<label for="emp5" class="t2t">Location:</label>
-						<input id="emp5" class="input66" type="text" name="location" 
-						style="height:25px;font-size:14pt;color: black;" value="{{ result[4] }}"><br>
-						
-						<label for="emp6" class="t2t">Status:</label>
-						<select class="custom-select" id="status" name="status">
-							<option value="Active">Active</option>
-							<option value="Inactive">Inactive</option>
-						</select>
-<!-- 						<input id="emp6" class="input66" type="text" name="status" 
-						style="height:25px;font-size:14pt;color: black;" value="{{ result[5] }}"><br> -->
+							<label for="emp3" class="t2t">Last Name:</label>
+							<input id="emp3" class="input66" type="text" name="last_name" 
+							style="height:25px;font-size:14pt;color: black;" value="{{ rowEmp.2 }}"><br>
 
-						<div style="text-align: center; margin-top: 10px;">
-							<button type="submit" class="btn btn-success" 
-							style="height:50px;font-size:14pt;color:white;width: 60%;">UPDATE EMPLOYEE INFORMATION</button>
-						</div>
-					</form>
+							<label for="emp4" class="t2t">Primary Skill:</label>
+							<input id="emp4" class="input66" type="text" name="pri_skill" 
+							style="height:25px;font-size:14pt;color: black;" value="{{ rowEmp.3 }}"><br>
 
-						<div style="text-align: center; margin-top: 10px;">
-							<a href="#" class="btn btn-danger deleteFunction" 
-							data-id1="{{ result[0] }}" data-id2="{{ result[1] }}" data-id3="{{ result[2] }}"
-							style="height:50px;font-size:14pt;color:white;width: 60%;">DELETE EMPLOYEE INFORMATION</a>
-						</div>
-						
+							<label for="emp5" class="t2t">Location:</label>
+							<input id="emp5" class="input66" type="text" name="location" 
+							style="height:25px;font-size:14pt;color: black;" value="{{ rowEmp.4 }}"><br>
+
+							<label for="emp6" class="t2t">Status:</label>
+							<select class="custom-select" id="status" name="status">
+								<option value="Active">Active</option>
+								<option value="Inactive">Inactive</option>
+							</select>
+
+							<div style="text-align: center; margin-top: 10px;">
+								<button type="submit" class="btn btn-success" 
+								style="height:50px;font-size:14pt;color:white;width: 60%;">UPDATE EMPLOYEE INFORMATION</button>
+							</div>
+						</form>
+
+							<div style="text-align: center; margin-top: 10px;">
+								<a href="#" class="btn btn-danger deleteFunction" 
+								data-id1="{{ result[0] }}" data-id2="{{ result[1] }}" data-id3="{{ result[2] }}"
+								style="height:50px;font-size:14pt;color:white;width: 60%;">DELETE EMPLOYEE INFORMATION</a>
+							</div>
+						{% endfor %}
 						<div style="text-align: center; margin-top: 10px;">
 							<a href="/getemp" class="btn btn-info"
                             style="height:40px;font-size:14pt;color:white;width: 40%;">GO TO PREVIOUS PAGE</a>
@@ -112,56 +110,58 @@ h1{
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" 
 	crossorigin="anonymous"></script>
 	<script>
-	$(document).ready(function(){  
-      		$( window ).on( "load", function() {
-            		$('#status').val("{{ result [5] }}");
+	{% for rowEmp in result %}
+		$(document).ready(function(){  
+			$( window ).on( "load", function() {
+				$('#status').val("{{ rowEmp.5 }}");
+			});
 		});
-      	});
-		
-	 $(document).on('click', '.deleteFunction', function(){  
-            var getEmpID = "{{ result [0] }}";
-	    var getFName = "{{ result [1] }}";
-	    var getLName = "{{ result [2] }}";
-            Swal.fire({
-              title: 'Are you sure for deleting ' +getFName+' '+getLName+ '?',
-              text: "You won't be able to revert this!",
-              icon: 'warning',
-              showCancelButton: true,
-              confirmButtonColor: '#d33',
-              cancelButtonColor: '#8f9494',
-              confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-              if (result.isConfirmed) {
-                  let timerInterval
-                    Swal.fire({
-                    title: 'Record deleted',
-                    icon: 'success',
-                    html: 'The '+getFName+' '+getLName+ ' has been deleted.', //text
-                    timer: 5000,// 1000 = 1second
-                    timerProgressBar: true,//timerProgressBar
-                    confirmButtonText:'Ok',//ConfirmButton show with text 'Ok'
-                    onBeforeOpen: () => {
-                    //	Swal.showLoading()
-                        timerInterval = setInterval(() => {
-                        const content = Swal.getContent()
-                        if (content) {
-                            const b = content.querySelector('b')
-                            if (b) {
-                                b.textContent = Math.ceil(swal.getTimerLeft() / 1000) //to get second for text
-                            }
-                        }
-                        }, 1000)
-                    },
-                    onClose: () => {
-                        clearInterval(timerInterval)
-                    }
-                    }).then((result) => {
-                        //timer
-                        window.location.href="/delete/"+getEmpID;
-                    })
-              }
-            })
-      });
+
+		 $(document).on('click', '.deleteFunction', function(){  
+		    var getEmpID = "{{ rowEmp.0 }}";
+		    var getFName = "{{ rowEmp.1 }}";
+		    var getLName = "{{ rowEmp.2 }}";
+		    Swal.fire({
+		      title: 'Are you sure for deleting ' +getFName+' '+getLName+ '?',
+		      text: "You won't be able to revert this!",
+		      icon: 'warning',
+		      showCancelButton: true,
+		      confirmButtonColor: '#d33',
+		      cancelButtonColor: '#8f9494',
+		      confirmButtonText: 'Yes, delete it!'
+		    }).then((result) => {
+		      if (result.isConfirmed) {
+			  let timerInterval
+			    Swal.fire({
+			    title: 'Record deleted',
+			    icon: 'success',
+			    html: 'The '+getFName+' '+getLName+ ' has been deleted.', //text
+			    timer: 5000,// 1000 = 1second
+			    timerProgressBar: true,//timerProgressBar
+			    confirmButtonText:'Ok',//ConfirmButton show with text 'Ok'
+			    onBeforeOpen: () => {
+			    //	Swal.showLoading()
+				timerInterval = setInterval(() => {
+				const content = Swal.getContent()
+				if (content) {
+				    const b = content.querySelector('b')
+				    if (b) {
+					b.textContent = Math.ceil(swal.getTimerLeft() / 1000) //to get second for text
+				    }
+				}
+				}, 1000)
+			    },
+			    onClose: () => {
+				clearInterval(timerInterval)
+			    }
+			    }).then((result) => {
+				//timer
+				window.location.href="/delete/"+getEmpID;
+			    })
+		      }
+		    })
+	      	});
+	{% endfor %}	
 	function validateEditEmp(){
 		valid=true;
 		if(document.EditEmp.first_name.value=="" || document.EditEmp.first_name.value==null){
