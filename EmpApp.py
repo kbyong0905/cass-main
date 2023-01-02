@@ -36,7 +36,7 @@ def getemp():
     
     select_stmt = "SELECT * FROM employee"
     cursor = db_conn.cursor()
-            
+         
     try:
         cursor.execute(select_stmt)
         resultdata=cursor.fetchall()
@@ -54,7 +54,6 @@ def getemp():
 
 @app.route("/addemp", methods=['POST'])
 def AddEmp():
-    emp_id = request.form['emp_id']
     first_name = request.form['first_name']
     last_name = request.form['last_name']
     pri_skill = request.form['pri_skill']
@@ -66,11 +65,32 @@ def AddEmp():
         return "Please select a file"
 
     try:
+        getID=0
+        
+        try:
+            db_conn.ping()
+            cursor = db_conn.cursor()
+            insert_sql = "INSERT INTO employee VALUES ( %s, %s, %s, %s, 'Active')"
+            cursor.execute(insert_sql, first_name, last_name, pri_skill, location))
+            getID= cursor.lastrowid
+            db_conn.commit()
+            cursor.close()
+            
+
+        except:
+            db_conn.ping()
+            cursor = db_conn.cursor() 
+            insert_sql = "INSERT INTO employee VALUES ( %s, %s, %s, %s, 'Active')"
+            cursor.execute(insert_sql, first_name, last_name, pri_skill, location))
+            getID= cursor.lastrowid
+            db_conn.commit()
+            cursor.close()
+            
         emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
-        emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
+        emp_image_file_name_in_s3 = "emp-id-" + str(getID) + "_image_file"
         s3 = boto3.resource('s3')
-
+        
         try:
             print("Data inserted in MySQL RDS... uploading image to S3...")
             s3.Bucket(custombucket).put_object(Key=emp_image_file_name_in_s3, Body=emp_image_file)
@@ -86,11 +106,6 @@ def AddEmp():
                 s3_location,
                 custombucket,
                 emp_image_file_name_in_s3)
-            
-            insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s, 'Active')"
-            cursor = db_conn.cursor()
-            cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location))
-            db_conn.commit()
 
         except Exception as e:
             return str(e)
@@ -110,10 +125,24 @@ def getEmp():
      cursor = db_conn.cursor()
             
      try:
-         cursor.execute(select_stmt, { 'emp_id': int(emp_id) })
-         for result in cursor:
-            print(result)
-
+        db_conn.ping()
+        cursor = db_conn.cursor()          
+        insert_sql = "SELECT * FROM employee WHERE emp_id = %(emp_id)s"
+        cursor.execute(select_stmt, { 'emp_id': int(emp_id) })
+        db_conn.commit()
+        cursor.close()
+        for result in cursor:
+           print(result
+                 
+    except:
+        db_conn.ping()
+        cursor = db_conn.cursor()          
+        insert_sql = "SELECT * FROM employee WHERE emp_id = %(emp_id)s"
+        cursor.execute(select_stmt, { 'emp_id': int(emp_id) })
+        db_conn.commit()
+        cursor.close()
+    
+    
      except Exception as e:
         return str(e)
         
@@ -157,10 +186,21 @@ def EditStaff():
     #if no image uploaded
     if edit_image.filename == "":
         try:
-            insert_sql = "UPDATE employee SET first_name= %s, last_name=%s, pri_skill=%s, location=%s, status=%s WHERE emp_id = %s"
+            db_conn.ping()
             cursor = db_conn.cursor()
+            insert_sql = "UPDATE employee SET first_name= %s, last_name=%s, pri_skill=%s, location=%s, status=%s WHERE emp_id = %s"
             cursor.execute(insert_sql, (first_name, last_name, pri_skill, location, status, emp_id))
             db_conn.commit()
+            cursor.close()
+            
+        except:
+            db_conn.ping()
+            cursor = db_conn.cursor()
+            insert_sql = "UPDATE employee SET first_name= %s, last_name=%s, pri_skill=%s, location=%s, status=%s WHERE emp_id = %s"
+            cursor.execute(insert_sql, (first_name, last_name, pri_skill, location, status, emp_id))
+            db_conn.commit()
+            cursor.close()
+                
 
         except Exception as e:
             return str(e)
@@ -197,13 +237,23 @@ def EditStaff():
             cursor.close()
 
 
-    select_stmt = "SELECT * FROM employee WHERE emp_id = %(emp_id)s"
-    cursor = db_conn.cursor()
-            
     try:
+        db_conn.ping()
+        cursor = db_conn.cursor()          
+        insert_sql = "SELECT * FROM employee WHERE emp_id = %(emp_id)s"
         cursor.execute(select_stmt, { 'emp_id': int(emp_id) })
+        db_conn.commit()
+        cursor.close()
         for result in cursor:
-            print(result)
+           print(result
+                 
+    except:
+        db_conn.ping()
+        cursor = db_conn.cursor()          
+        insert_sql = "SELECT * FROM employee WHERE emp_id = %(emp_id)s"
+        cursor.execute(select_stmt, { 'emp_id': int(emp_id) })
+        db_conn.commit()
+        cursor.close()
 
     except Exception as e:
         return str(e)
