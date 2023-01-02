@@ -101,11 +101,6 @@ def AddEmp():
     print("all modification done...")
     return render_template('AddEmpOutput.html', name=emp_name)
 
-# Add Employee Done
-@app.route("/addemp/",methods=['GET','POST'])
-def addEmpDone():
-    return render_template('AddEmp.html')
-
 # Get Employee Information
 @app.route("/fetchdata",methods=['GET','POST'])
 def getEmp():
@@ -148,14 +143,8 @@ def getEmp():
         except Exception as e:
             return str(e)
         
-#      return render_template('GetEmp.html', emp_id= emp_id, first_name=first_name , last_name=last_name , pri_skill=pri_skill , location=location, image_url=object_url)
      return render_template('GetEmpOutput.html', result=result, image_url=object_url)
 
-# Get Employee Done
-@app.route("/fetchdata/",methods=['GET','POST'])
-def getEmpDone():
-    
-    return render_template('GetEmp.html')
 
 @app.route("/update", methods=['POST'])
 def EditStaff():
