@@ -94,8 +94,8 @@ h1{
 
 					<form action="/delete/{{ result[0] }}" autocomplete="on" method = "POST" enctype="multipart/form-data">
 						<div style="text-align: center; margin-top: 10px;">
-							<button type="submit" class="btn btn-danger"
-							style="height:50px;font-size:14pt;color:white;width: 60%;">DELETE EMPLOYEE INFORMATION</button>
+							<button type="submit" class="btn btn-danger delete" style="height:50px;font-size:14pt;color:white;width: 60%;"
+							data-confirm="Are you sure to delete this employee information?">DELETE EMPLOYEE INFORMATION</button>
 						</div>
 					</form>
 						
@@ -117,6 +117,17 @@ h1{
             		$('#status').val("{{ result [5] }}");
 		});
       	});
+	var deleteLinks = document.querySelectorAll('.delete');
+
+	for (var i = 0; i < deleteLinks.length; i++) {
+  		deleteLinks[i].addEventListener('click', function(event) {
+	  	event.preventDefault();
+	  	var choice = confirm(this.getAttribute('data-confirm'));
+			if (choice) {
+	    			window.location.href = this.getAttribute('href');
+	  		}
+  		});
+	}
 	</script>
 </body>
 </html>
