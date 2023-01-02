@@ -182,7 +182,6 @@ def EditStaff():
     #if no image uploaded
     if edit_image.filename == "":
         try:
-            db_conn.ping()
             cursor = db_conn.cursor()
             insert_sql = "UPDATE employee SET first_name= %s, last_name=%s, pri_skill=%s, location=%s, status=%s WHERE emp_id = %s"
             cursor.execute(insert_sql, (first_name, last_name, pri_skill, location, status, emp_id))
@@ -211,51 +210,29 @@ def EditStaff():
             # Upload image file in S3 #
             image_file_name = "emp-id-" + str(emp_id) + "_image_file"
             s3 = boto3.resource('s3')
-
-            insert_sql = "UPDATE employee SET first_name=%s, last_name=%s, pri_skill=%s, location=%s, status=%s WHERE emp_id = %s"
-            cursor = db_conn.cursor()
-            cursor.execute(insert_sql, (first_name, last_name, pri_skill, location, status, emp_id))
-            db_conn.commit()
+            try:
+                cursor = db_conn.cursor()
+                insert_sql = "UPDATE employee SET first_name=%s, last_name=%s, pri_skill=%s, location=%s, status=%s WHERE emp_id = %s"
+                cursor.execute(insert_sql, (first_name, last_name, pri_skill, location, status, emp_id))
+                db_conn.commit()
+                cursor.close()
+            
+            except:
+                db_conn.ping()
+                cursor = db_conn.cursor()
+                insert_sql = "UPDATE employee SET first_name=%s, last_name=%s, pri_skill=%s, location=%s, status=%s WHERE emp_id = %s"
+                cursor.execute(insert_sql, (first_name, last_name, pri_skill, location, status, emp_id))
+                db_conn.commit()
+                cursor.close()
             
             print("Data inserted in MySQL RDS... uploading image to S3...")
             s3.Bucket(custombucket).put_object(Key=image_file_name, Body=edit_image)
             bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
             s3_location = (bucket_location['LocationConstraint'])
             
-            if s3_location is None:
-                s3_location = ''
-            else:
-                s3_location = '-' + s3_location
-        except Exception as e:
-            return str(e)
-        
+            
         finally:
             cursor.close()
-
-
-    try:
-        db_conn.ping()
-        cursor = db_conn.cursor()          
-        insert_sql = "SELECT * FROM employee WHERE emp_id = %(emp_id)s"
-        cursor.execute(select_stmt, { 'emp_id': int(emp_id) })
-        db_conn.commit()
-        cursor.close()
-        for result in cursor:
-           print(result
-                 
-    except:
-        db_conn.ping()
-        cursor = db_conn.cursor()          
-        insert_sql = "SELECT * FROM employee WHERE emp_id = %(emp_id)s"
-        cursor.execute(select_stmt, { 'emp_id': int(emp_id) })
-        db_conn.commit()
-        cursor.close()
-
-    except Exception as e:
-        return str(e)
-            
-    finally:
-        cursor.close()
 
     emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
     s3 = boto3.resource('s3')
