@@ -32,16 +32,16 @@ def about():
 
 @app.route("/getemp", methods=['GET', 'POST'])
 def getemp():
-     result= ""
+     resultdata= ""
     
      select_stmt = "SELECT * FROM employee"
      cursor = db_conn.cursor()
             
      try:
          cursor.execute(select_stmt)
-         result=cursor.fetchall()
-         for result in cursor:
-            print(result)
+         resultdata=cursor.fetchall()
+         for resultEmp in cursor:
+            print(resultEmp)
 
      except Exception as e:
         return str(e)
@@ -50,7 +50,7 @@ def getemp():
         cursor.close()
 
        
-    return render_template('GetEmp.html', result=result)
+    return render_template('GetEmp.html', result=resultdata)
 
 
 @app.route("/addemp", methods=['POST'])
