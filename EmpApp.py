@@ -45,8 +45,6 @@ def AddEmp():
 
     emp_image_file = request.files['emp_image_file']
 
-    
-
     if emp_image_file.filename == "":
         return "Please select a file"
 
@@ -77,8 +75,8 @@ def AddEmp():
             cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location))
             db_conn.commit()
 
-    except Exception as e:
-        return str(e)
+        except Exception as e:
+            return str(e)
 
     finally:
         cursor.close()
