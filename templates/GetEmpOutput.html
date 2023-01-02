@@ -46,7 +46,7 @@ h1{
 		<div class="h-100 d-flex align-items-center justify-content-center">
 			<div style="background-color: #ffffff; color: #183a1d; width: 50%; margin: 10px auto; border-radius: 5px;">
 				<div style="padding: 20px;">
-					<form action="/update" autocomplete="on" method = "POST" enctype="multipart/form-data">
+					<form name="EditEmp" action="/update" autocomplete="on" method = "POST" enctype="multipart/form-data" onsubmit="return validateEditEmp();">
 						<div style="text-align: center;">
 							<img class="circular_image" src="{{ image_url }}" style="text-align: center;"><br>
 						</div>
@@ -162,6 +162,26 @@ h1{
               }
             })
       });
+	function validateEditEmp(){
+		valid=true;
+		if(document.EditEmp.first_name.value=="" || document.EditEmp.first_name.value==null){
+		   Swal.fire("First name cannot be blank", "Please enter Employee's First name", "error");
+		     valid=false;
+		 }else if(document.EditEmp.last_name.value=="" || document.EditEmp.last_name.value==null){
+		   Swal.fire("Last name cannot be blank", "Please enter  Employee's Last name", "error");
+		     valid=false;
+		 }else if(document.EditEmp.pri_skill.value==""){
+		  Swal.fire("Primary skill cannot be blank", "Please select the Employee's Primary skill", "error");
+		    valid=false;
+		}else if(document.EditEmp.location.value==""){
+		  Swal.fire("Location cannot be blank", "Please select the Employee's Location", "error");
+		    valid=false;
+		}else if(document.EditEmp.emp_image_file.value==""){
+		   Swal.fire("Image cannot be blank", "Please choose a file to upload", "error");
+		     valid=false;
+		 }
+		 return valid;
+    	}
 	</script>
 </body>
 </html>
